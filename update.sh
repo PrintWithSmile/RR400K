@@ -11,6 +11,16 @@ if ! command -v zip &> /dev/null; then
         exit 1
     fi
 fi
+
+slozka="/home/pi/Klipper_IP"
+
+if [ ! -d "$slozka" ]; then
+    git clone https://github.com/PrintWithSmile/Klipper_IP.git
+	cd Klipper_IP
+	chmod +x install.sh
+	./install.sh
+fi
+
 echo "Zálohuji předchozí konfigurace"
 cd /home/pi/printer_data/config
 zip -r "zaloha_$(date +"%d-%m-%Y").zip" /home/pi/printer_data/config/* -x "/home/pi/printer_data/config/Archive/*" -x "/home/pi/printer_data/config/Archive"
